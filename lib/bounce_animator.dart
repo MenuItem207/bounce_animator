@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-// handles the animation of child when pressed
 class BounceAnimator extends StatefulWidget {
   final Widget child;
   final Function onPressed;
@@ -14,14 +13,17 @@ class BounceAnimator extends StatefulWidget {
   const BounceAnimator(
       {Key? key,
       required this.child,
-      required this.onPressed,
-      required this.onLongPress,
+      this.onPressed = _dummyFunction,
+      this.onLongPress = _dummyFunction,
       this.duration = const Duration(milliseconds: 225),
       this.scale = 0.8})
       : super(key: key);
 
   @override
   State<BounceAnimator> createState() => _BounceAnimatorState();
+
+  /// used as a placeholder for optional function parameters
+  static void _dummyFunction() {}
 }
 
 class _BounceAnimatorState extends State<BounceAnimator>
@@ -85,13 +87,14 @@ class _BounceAnimatorState extends State<BounceAnimator>
     );
   }
 
+  /// starts the timeout for the long press
   Timer startTimeout() {
     var duration = const Duration(milliseconds: 500);
     return Timer(duration, handleTimeout);
   }
 
+  /// callback function
   void handleTimeout() {
-    // callback function
     if (pressed) {
       // if still pressed after 2 seconds
       widget.onLongPress();
