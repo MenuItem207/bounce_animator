@@ -71,15 +71,9 @@ class _BounceAnimatorState extends State<BounceAnimator>
           startTimeout();
         });
       },
-      onTapUp: (details) {
-        setState(() {
-          if (pressed) {
-            widget.onPressed();
-          }
-          pressed = false;
-          _controller.reverse();
-        });
-      },
+      onTapUp: (details) => onComplete(),
+      onHorizontalDragEnd: (details) => onComplete(),
+      onVerticalDragEnd: (details) => onComplete(),
       child: Transform.scale(
         scale: _scale,
         child: widget.child,
@@ -100,5 +94,16 @@ class _BounceAnimatorState extends State<BounceAnimator>
       widget.onLongPress();
       pressed = false;
     }
+  }
+
+  /// on longPress complete
+  void onComplete() {
+    setState(() {
+      if (pressed) {
+        widget.onPressed();
+      }
+      pressed = false;
+      _controller.reverse();
+    });
   }
 }
