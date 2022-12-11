@@ -8,6 +8,7 @@ class BounceAnimator extends StatefulWidget {
   final Widget child;
   final Function onPressed;
   final Function onLongPress;
+  final Function onLongPressTapUp;
   final Duration duration;
   final double scale;
   const BounceAnimator(
@@ -15,6 +16,7 @@ class BounceAnimator extends StatefulWidget {
       required this.child,
       this.onPressed = _dummyFunction,
       this.onLongPress = _dummyFunction,
+      this.onLongPressTapUp = _dummyFunction,
       this.duration = const Duration(milliseconds: 225),
       this.scale = 0.8})
       : super(key: key);
@@ -71,7 +73,10 @@ class _BounceAnimatorState extends State<BounceAnimator>
           startTimeout();
         });
       },
-      onTapUp: (details) => onComplete(),
+      onTapUp: (details) {
+        onComplete();
+        widget.onLongPressTapUp();
+      },
       onHorizontalDragEnd: (details) => onComplete(),
       onVerticalDragEnd: (details) => onComplete(),
       child: Transform.scale(
