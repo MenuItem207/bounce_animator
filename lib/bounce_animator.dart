@@ -77,8 +77,14 @@ class _BounceAnimatorState extends State<BounceAnimator>
         onComplete();
         widget.onLongPressTapUp();
       },
-      onHorizontalDragEnd: (details) => onComplete(),
-      onVerticalDragEnd: (details) => onComplete(),
+      onHorizontalDragEnd: (details) {
+        onComplete();
+        widget.onLongPressTapUp();
+      },
+      onVerticalDragEnd: (details) {
+        onComplete();
+        widget.onLongPressTapUp();
+      },
       child: Transform.scale(
         scale: _scale,
         child: widget.child,
