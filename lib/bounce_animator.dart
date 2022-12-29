@@ -77,11 +77,7 @@ class _BounceAnimatorState extends State<BounceAnimator>
         onComplete();
         widget.onLongPressTapUp();
       },
-      onHorizontalDragEnd: (details) {
-        onComplete();
-        widget.onLongPressTapUp();
-      },
-      onVerticalDragEnd: (details) {
+      onTapCancel: () {
         onComplete();
         widget.onLongPressTapUp();
       },
