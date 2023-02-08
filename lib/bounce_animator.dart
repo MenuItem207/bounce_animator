@@ -8,7 +8,10 @@ class BounceAnimator extends StatefulWidget {
   final Widget child;
   final Function onPressed;
   final Function onLongPress;
+
+  // TODO: refactor / rephrase label since this is currently called onTapUp even if just tapped
   final Function onLongPressTapUp;
+
   final Duration duration;
   final double scale;
   const BounceAnimator(
